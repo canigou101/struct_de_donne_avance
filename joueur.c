@@ -14,12 +14,12 @@ t_personne nouveau_joueur(char* id,int elo,int canal){
     res->identificateur=id;
     res->l_elo=elo;
     res->le_canal=canal;
-    res->registerDate=get_time();
+    res->registerDate=0;
     return (t_personne)res;
     
 }
 void afficher_joueur(t_personne lui){
-    printf("nom: %s\n elo: %d\n canal: %d\n reg date: %ld\n",lui->identificateur,lui->l_elo,lui->le_canal,lui->registerDate);
+    printf("nom: %s  - elo: %d  - canal: %d  - reg date: %ld",lui->identificateur,lui->l_elo,lui->le_canal,lui->registerDate);
 
 }
 void supprimer_joueur(t_personne* lui){

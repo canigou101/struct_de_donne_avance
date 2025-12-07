@@ -2,7 +2,11 @@
 #define P_MATCH_H
 #include <stdlib.h>
 #include "avl.h"
+#include "joueur.h"
 
-void chercherMatch(tAvl* ceci);
+//typedef void* t_conteneur;
+
+
+void chercherMatch(t_conteneur* ceci, time_t timeZero);
 
 #endif

@@ -1,6 +1,15 @@
 #include <stdio.h>
 #include "avl.h"
 
+typedef struct sNoeud{
+    struct sNoeud* gauche;
+    struct sNoeud* droite;
+    //struct sNoeud* precedent;
+    int hauteur;
+    t_personne joueur;
+}tNoeud;
+typedef tNoeud* tAvl;
+
 t_conteneur nouveau_conteneur(){
     return CONTENEUR_NON_INITIALISE;
 }
@@ -46,12 +55,12 @@ int desequilibre(tAvl ceci){
 
 void afficher_conteneur_rec(tAvl ceci, int decalage){
     if(ceci != NULL){
-        afficher_conteneur_rec(((tAvl)ceci)->gauche,decalage+1);
+        afficher_conteneur_rec((ceci)->gauche,decalage+1);
         for (int i = 0; i < decalage; i++){
             printf("   ");
         }
         afficher_joueur(ceci->joueur);
-        printf("h=%d ; deseq=%d\n", ceci->hauteur, desequilibre(ceci));
+        printf(" - h=%d ; deseq=%d\n", ceci->hauteur, desequilibre(ceci));
         afficher_conteneur_rec(((tAvl)ceci)->droite, decalage+1);
     }
 }
@@ -101,7 +110,7 @@ void rotationDG(tAvl* ceci){
 }
 
 void rotationGD(tAvl* ceci){
-    rotationDroite(&((*ceci)->droite));
+    //rotationDroite(&((*ceci)->droite));
     rotationGauche(ceci);
 }
 
@@ -125,17 +134,17 @@ void inserer_avl(tAvl* ceci, t_personne cela){
     if(*ceci == NULL){
         *ceci = nouvelle_feuille(cela);
     }else{
-        if((*ceci)->joueur->registerDate < (cela->registerDate)){
+        if((*ceci)->joueur->l_elo > (cela->l_elo)){
             inserer_avl(&((*ceci)->droite), cela);
         }else{
             inserer_avl(&((*ceci)->gauche), cela);
         }
         mettreAJour(*ceci);
-        if(desequilibre(*ceci) < -1){
+        /*if(desequilibre(*ceci) < -1){
             ramener_a_gauche(ceci);
         }else if (desequilibre(*ceci) > 1){
             ramener_a_droite(ceci);
-        }
+        }*/
     }
 }
 
@@ -143,8 +152,10 @@ void inserer_avl(tAvl* ceci, t_personne cela){
 
 
 int ajouter_conteneur(t_conteneur* ceci, t_personne cela, time_t timeZero){
-    inserer_avl((tAvl*)ceci,cela);
+    //printf("\n*%d*\n",time(NULL) - timeZero);
     cela->registerDate = time(NULL) - timeZero;
+    printf("\n*%d*\n",cela->registerDate);
+    inserer_avl((tAvl*)ceci,cela);
     return 1;
 }
     

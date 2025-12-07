@@ -13,15 +13,6 @@
        - restituer un élément précédemment stocké.
  */
 
-typedef struct sNoeud{
-    t_personne joueur;
-    struct sNoeud* gauche;
-    struct sNoeud* droite;
-    //struct sNoeud* precedent;
-    int hauteur;
-}tNoeud;
-typedef tNoeud* tAvl;
-
 typedef void* t_conteneur;
 
 #define CONTENEUR_NON_INITIALISE NULL
