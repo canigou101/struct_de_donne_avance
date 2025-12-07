@@ -44,17 +44,13 @@ void MettreAJourAvl(tAvl* ceci){
     }
 }
 
-void retirerNoeudFin(tAvl* ceci){
-    *ceci = NULL;
-    free(*ceci);
-}
-
 tAvl supprimer(tAvl ceci){
     if( (ceci->gauche == NULL) || (ceci->droite == NULL) ){
         tAvl temp = ceci->gauche ? ceci->gauche : ceci->droite;
             if (temp == NULL)
             {
-                retirerNoeudFin(&ceci);
+                temp = ceci;
+                ceci = NULL;
             }
             else{
                 printf("test2 ");
