@@ -140,11 +140,11 @@ void inserer_avl(tAvl* ceci, t_personne cela){
             inserer_avl(&((*ceci)->gauche), cela);
         }
         mettreAJour(*ceci);
-        /*if(desequilibre(*ceci) < -1){
-            ramener_a_gauche(ceci);
-        }else if (desequilibre(*ceci) > 1){
+        if(desequilibre(*ceci) < -1){
             ramener_a_droite(ceci);
-        }*/
+        }else if (desequilibre(*ceci) > 1){
+            ramener_a_gauche(ceci);
+        }
     }
 }
 
